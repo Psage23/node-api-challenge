@@ -5,7 +5,7 @@ const router = express.Router();
 //use CRUD here
 router.post('/', validateAction, (req, res) => {
     db.insert(req.body).then(action => {
-        res.status(201).json(action)
+        res.status(200).json(action)
     })
     .catch(error => {
         res.status(500).json({message: "error adding action"})
@@ -48,6 +48,21 @@ router.delete('/:id', validateActionID, (req, res) => {
 
 
 //middleware
+function validateActionID(req, res, next) {
+    db.get(req.params.id).then(action => {
+        if(action) {
+            req.action = action;
+            next();
+        }
+        else{
+            res.status(404).json({message: "error with action id"})
+        }
+    })
+    .catch(error => {
+        res.status(500).json({message: "Action id could not be retrieved"})
+    })
+}
+
 function validateAction(req, res, next) {
     if (req.body) {
         if (!req.body.project_id) {
@@ -68,19 +83,6 @@ function validateAction(req, res, next) {
     }
 }
 
-function validateActionID(req, res, next) {
-    db.get(req.params.id).then(action => {
-        if(action) {
-            req.action = action;
-            next();
-        }
-        else{
-            res.status(404).json({message: "error with action id"})
-        }
-    })
-    .catch(error => {
-        res.status(500).json({message: "Action id could not be retrieved"})
-    })
-}
+
 
 module.exports = router;
