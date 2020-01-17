@@ -43,6 +43,7 @@ router.delete('/:id', validateActionID, (req, res) => {
     db.remove(req.params.id).then(action => {
         res.status(200).json(action);
     })
+    .catch(error => {res.status(500).json({message: "action is not deleted"})})
 })
 
 
