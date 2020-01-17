@@ -31,7 +31,7 @@ function get(id) {
 
 function insert(action) {
     return db("actions")
-        .insert(action)
+        .insert(action, "id")
         .then(([id]) => this.get(id));
 }
 

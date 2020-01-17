@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Custom middleware and routes
+
 - [ ] Describe Middleware?
+
+Custom or 3rd party functions to add extra functionality to Express
 
 - [ ] Describe a Resource?
 
+Data to be served
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+Status Code
+
 - [ ] How can we partition our application into sub-applications?
+
+Routers
 
 ## Minimum Viable Product
 
