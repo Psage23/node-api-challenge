@@ -3,6 +3,14 @@ const db = require('../data/helpers/projectModel');
 const router = express.Router();
 
 //use CRUD here
+router.post('/', validateProject, (req, res) => {
+    db.insert(req.body).then(project => {
+        res.status(200).json(project)
+    })
+    .catch(error => {res.status(500).json({message: "error in creating project"})
+    })
+})
+
 router.get('/', (req, res) => {
     db.get()
     .then(projects => {
