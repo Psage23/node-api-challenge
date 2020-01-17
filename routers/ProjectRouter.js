@@ -38,6 +38,14 @@ router.put('/:id', valdiateProjectID, validateProject, (req, res) => {
     })
 })
 
+router.delete('/:id', valdiateProjectID, (req, res) => {
+    db.remove(req.params.id).then(project => {
+        res.status(200).json(project)
+    })
+    .catch(error => {res.status(500).json({message: "error delete did not work"})})
+})
+
+
 //middleware
 function valdiateProjectID(req, res, next){
     db.get(req.params.id).then(project => {
