@@ -1,8 +1,10 @@
 const express = require('express');
+const ActionRouter = require('./routers/ActionRouter');
 const server = express();
 
 server.use(logger);
 server.use(express.json());
+server.use('/api/actions', ActionRouter);
 
 server.get('/', (req, res) => {
     res.send('<h2>Yes! Server is running </h2>')
