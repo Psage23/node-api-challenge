@@ -29,6 +29,15 @@ router.get('/:id', valdiateProjectID, (req, res) => {
     })
 })
 
+router.put('/:id', valdiateProjectID, validateProject, (req, res) => {
+    db.update(req.params.id, req.body).then(project => {
+        res.status(200).json(project)
+    })
+    .catch(error => {
+        res.status(500).json({message: "error update did not work"})
+    })
+})
+
 //middleware
 function valdiateProjectID(req, res, next){
     db.get(req.params.id).then(project => {
