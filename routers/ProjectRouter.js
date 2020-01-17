@@ -29,6 +29,13 @@ router.get('/:id', valdiateProjectID, (req, res) => {
     })
 })
 
+router.get('/:id/actions', valdiateProjectID, (req, res) => {
+    db.getProjectActions(req.params.id).then(actions => {
+        res.status(200).json(actions)
+    })
+    .catch(error => {res.status(500).json({message: "error can't get project's actions"})})
+})
+
 router.put('/:id', valdiateProjectID, validateProject, (req, res) => {
     db.update(req.params.id, req.body).then(project => {
         res.status(200).json(project)
